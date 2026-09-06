@@ -9,7 +9,7 @@ resource "aws_db_subnet_group" "subnet-grp" {
   tags = {
     Name = "rds-grp"
   }
-  
+
 }
 
 resource "aws_db_instance" "db" {
@@ -24,8 +24,8 @@ resource "aws_db_instance" "db" {
   vpc_security_group_ids      = [aws_security_group.rds-sg.id]
   skip_final_snapshot         = true
   storage_encrypted           = true
-  copy_tags_to_snapshot = true
-  backup_retention_period = 7
+  copy_tags_to_snapshot       = true
+  backup_retention_period     = 7
 
   tags = {
     Name = "main-rds"

@@ -183,7 +183,7 @@ resource "aws_launch_template" "app_lt" {
       delete_on_termination = true
     }
   }
-  
+
 }
 
 resource "aws_autoscaling_group" "app_asg" {
