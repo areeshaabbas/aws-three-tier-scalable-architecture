@@ -1,6 +1,6 @@
 # Highly Available Three-Tier Web Architecture on AWS with Terraform
 
-[![Terraform Security & Validation](https://github.com/<YOUR_GITHUB_USERNAME>/aws-three-tier-scalable-architecture/actions/workflows/terraform-ci.yml/badge.svg)](https://github.com/<YOUR_GITHUB_USERNAME>/aws-three-tier-scalable-architecture/actions/workflows/terraform-ci.yml)
+[![Terraform Security & Validation](https://github.com/areeshaabbas/aws-three-tier-scalable-architecture/actions/workflows/terraform-ci.yml/badge.svg)]
 
 A production-grade, highly available three-tier cloud infrastructure built on AWS using Terraform. This project features zero-trust network segregation, automated scaling, database credential rotation with Secrets Manager, and Infrastructure as Code (IaC) security scanning integrated into CI/CD.
 
