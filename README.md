@@ -16,20 +16,20 @@ flowchart TD
         User["End Users"]
     end
 
-    subgraph AWS_Cloud ["AWS Cloud (VPC: 10.0.0.0/16)"]
+    subgraph VPC ["AWS VPC (10.0.0.0/16)"]
         IGW["Internet Gateway"]
         
         subgraph Public_Subnets ["Public Subnets (Multi-AZ)"]
-            ALB["Application Load Balancer (ALB)<br/>SG: Allow 80/443 from 0.0.0.0/0"]
+            ALB["Application Load Balancer (ALB)<br/>Allow 80/443 from 0.0.0.0/0"]
             NAT["NAT Gateway"]
         end
 
         subgraph App_Subnets ["Private App Subnets (Multi-AZ)"]
-            ASG["Auto Scaling Group (EC2 Instances)<br/>Flask Web App (:8080)<br/>SG: Allow :8080 from ALB SG only"]
+            ASG["Auto Scaling Group<br/>Flask Web App (:8080)<br/>Allow :8080 from ALB SG"]
         end
 
         subgraph DB_Subnets ["Private Data Subnets (Multi-AZ)"]
-            RDS[("Amazon RDS MySQL (:3306)<br/>Storage Encrypted<br/>SG: Allow :3306 from EC2 SG only")]
+            RDS[("Amazon RDS MySQL (:3306)<br/>Storage Encrypted<br/>Allow :3306 from EC2 SG")]
         end
         
         SM["AWS Secrets Manager<br/>(RDS Credentials)"]
@@ -40,7 +40,8 @@ flowchart TD
     IGW --> ALB
     ALB -->|Forward :8080| ASG
     ASG -->|Port 3306| RDS
-    ASG -.->|IAM Auth| SM
-    AWS_Cloud -.->|VPC Flow Logs| CW
-    ASG -->|Egress Updates| NAT
+    ASG -.->|Fetch Credentials| SM
+    VPC -.->|Flow Traffic| CW
+    ASG -->|Outbound Updates| NAT
     NAT --> IGW
+```
